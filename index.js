@@ -37,7 +37,7 @@ onValue(locationInDatabase, (snapshot) => {
     const data = snapshot.val()
     const dataArray = Object.values(data)
 
-    console.log(dataArray)
+    render(dataArray)
 })
 
 function render(leads) {
