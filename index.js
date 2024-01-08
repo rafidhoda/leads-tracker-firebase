@@ -35,10 +35,12 @@ tabBtn.addEventListener("click", function(){
 })
 
 onValue(locationInDatabase, (snapshot) => {
-    const data = snapshot.val()
-    const dataArray = Object.values(data)
+    if (snapshot.exists()) {
+        const data = snapshot.val()
+        const dataArray = Object.values(data)
 
-    render(dataArray)
+        render(dataArray)
+    }
 })
 
 function render(leads) {
