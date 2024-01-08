@@ -2,7 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getDatabase,
          ref,
          push,
-         onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+         onValue,
+         remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
             
 const firebaseConfig = {
     databaseURL: "https://pebbles-afe23-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -55,6 +56,8 @@ function render(leads) {
 }
 
 deleteBtn.addEventListener("dblclick", function() {
+    remove(locationInDatabase)
+
     localStorage.clear()
     myLeads = []
     render(myLeads)
