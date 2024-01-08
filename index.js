@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
 import { getDatabase,
          ref,
-         push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+         push,
+         onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
             
 const firebaseConfig = {
     databaseURL: "https://pebbles-afe23-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -9,6 +10,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
+const locationInDatabase = ref(database, "inputs")
 
 let myLeads = []
 const inputEl = document.getElementById("input-el")
@@ -29,6 +31,12 @@ tabBtn.addEventListener("click", function(){
         localStorage.setItem("myLeads", JSON.stringify(myLeads) )
         render(myLeads)
     })
+})
+
+onValue(locationInDatabase, (snapshot) => {
+    const data = snapshot.val()
+
+    console.log(data)
 })
 
 function render(leads) {
@@ -52,8 +60,6 @@ deleteBtn.addEventListener("dblclick", function() {
 })
 
 inputBtn.addEventListener("click", function() {
-    const locationInDatabase = ref(database, "inputs")
-
     push(locationInDatabase, inputEl.value)
     inputEl.value = ""
 })
