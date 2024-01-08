@@ -35,8 +35,9 @@ tabBtn.addEventListener("click", function(){
 
 onValue(locationInDatabase, (snapshot) => {
     const data = snapshot.val()
+    const dataArray = Object.values(data)
 
-    console.log(data)
+    console.log(dataArray)
 })
 
 function render(leads) {
